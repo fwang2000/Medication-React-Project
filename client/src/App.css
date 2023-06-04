@@ -1,0 +1,33 @@
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+html, body, #root, .App, .container {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.App {
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  font-size: 1vh;
+  padding: 2%;
+}
+
+#grid-header {
+  color: #e69b88;
+  font-size: 5vh;
+  font-family: Helvetica, sans-serif;
+  margin:0%;
+  padding-bottom: 5px;
+}
+
+.ag-theme-alpine {
+  height: 100%;
+  width: 100%;
+  color: #e69b88;
+}
