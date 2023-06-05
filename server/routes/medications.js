@@ -1,50 +1,54 @@
+const operations = require('./operations');
+
 const medicationRoutes = (app, fs) => {
 
     const dataPath = './data/medication.json';
 
-    const readFile = (
-        callback,
-        returnJson = false,
-        filePath = dataPath,
-        encoding = 'utf8'
-    ) => {
-
-        fs.readFile(dataPath, 'utf8', (err, data) => {
-            
-            if (err) {
-                throw err;
-            }
-
-            callback(returnJson ? JSON.parse(data) : data);
-        });
-    }
-
-    const writeFile = (
-        fileData,
-        callback,
-        filePath = dataPath,
-        encoding = 'utf-8'
-    ) => {
-        fs.writeFile(filePath, fileData, encoding, (err) => {
-            if (err) {
-                throw err;
-            }
-
-            callback();
-        })
-    }
-
     app.get('/medications', (req, res) => {
 
-        readFile((data) => {
+        operations.readFile((data) => {
             res.send(data)
-        }, true);
+        }, true, dataPath);
     });
 
     app.post('/medications', (req, res) => {
 
-        writeFile
-    })
+        operations.readFile((data) => {
+
+            // create new row id or something
+            
+            operations.writeFile(JSON.stringify(data, null, 2), () => {
+                res.status(200).send('new medication added')
+            })
+        }, true, dataPath);
+    });
+
+    app.put('/medications/:id', (req, res) => {
+
+        operations.readFile((data) => {
+
+            // get row ID
+            const medicationID = req.params['id'];
+            data[medicationID] = req.body;
+
+            operations.writeFile(JSON.stringify(data, null, 2), () => {
+                res.status(200).send(`medication id ${medicationID} updated`);
+            });
+        }, true, dataPath);
+    });
+
+    app.delete('/medications/:id', (req, res) => {
+
+        operations.readFile((data) => {
+
+            const medicationId = req.params['id'];
+            delete data[medicationId];
+
+            operations.writeFile(JSON.stringify(data, null, 2), () => {
+                res.status(200).send(`medication id ${medicationID} deleted`);
+            });
+        }, true, dataPath);
+    });
 };
 
 module.exports = medicationRoutes;
