@@ -21,6 +21,8 @@ const medicationValueGetter = (params: ValueGetterParams) => {
 const MedicationGridComponent = () => {
 
     const [rowData, setRowData] = useState([{}]);
+    const containerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
+    const gridStyle = useMemo(() => ({ height: '95%', width: '100%' }), []);
     const defaultColDefs = useMemo<ColDef>(() => {
         return {
             suppressMenu: true,
@@ -28,10 +30,15 @@ const MedicationGridComponent = () => {
             filter: false,
             pinned: true,
             wrapText: true,
-            autoHeight: true,
+            autoHeight: true
         };
     }, []);
     const [columnDefs] = useState([
+        {
+            headername: "Index",
+            field: "index",
+            hide: true
+        },
         {
             headerName: "Is PRN",
             field: "isprn",
@@ -40,7 +47,8 @@ const MedicationGridComponent = () => {
         {
             headerName: "Medication",
             valueGetter: medicationValueGetter,
-            cellRenderer: MedicationCellRenderer
+            cellRenderer: MedicationCellRenderer,
+            editable: true
         },
         {
             headerName: "Last Administered",
@@ -52,7 +60,8 @@ const MedicationGridComponent = () => {
         },
         {
             headerName: "Days",
-            field: "days"
+            field: "days",
+            editable: true
         }
     ]);
 
@@ -71,8 +80,9 @@ const MedicationGridComponent = () => {
     }
       
     return (
-        <div className="container">
-            <div className="ag-theme-alpine ag-odd-row">
+        <div className="container" style={containerStyle}>
+            <h2 id="grid-header">Active Medication</h2>
+            <div className="ag-theme-alpine ag-odd-row" style={gridStyle}>
                 <AgGridReact
                     rowData={rowData}
                     columnDefs={columnDefs}
