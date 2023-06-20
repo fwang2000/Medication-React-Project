@@ -18,6 +18,10 @@ html, body, #root, .App, .container {
   padding: 2%;
 }
 
+.header {
+  display: block;
+}
+
 #grid-header {
   color: #e69b88;
   font-size: 5vh;

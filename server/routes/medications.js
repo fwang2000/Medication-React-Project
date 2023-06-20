@@ -19,7 +19,7 @@ const medicationRoutes = (app, fs) => {
             
             operations.writeFile(JSON.stringify(data, null, 2), () => {
                 res.status(200).send('new medication added')
-            })
+            }, dataPath)
         }, true, dataPath);
     });
 
@@ -27,13 +27,12 @@ const medicationRoutes = (app, fs) => {
 
         operations.readFile((data) => {
 
-            // get row ID
-            const medicationID = req.params['id'];
+            const medicationID = req.params['id'] - 1;
             data[medicationID] = req.body;
 
             operations.writeFile(JSON.stringify(data, null, 2), () => {
-                res.status(200).send(`medication id ${medicationID} updated`);
-            });
+                res.status(200).json({ message : `medication id ${medicationID} updated` });
+            }, dataPath);
         }, true, dataPath);
     });
 
@@ -41,12 +40,12 @@ const medicationRoutes = (app, fs) => {
 
         operations.readFile((data) => {
 
-            const medicationId = req.params['id'];
+            const medicationId = req.params['index'];
             delete data[medicationId];
 
             operations.writeFile(JSON.stringify(data, null, 2), () => {
                 res.status(200).send(`medication id ${medicationID} deleted`);
-            });
+            }, dataPath);
         }, true, dataPath);
     });
 };

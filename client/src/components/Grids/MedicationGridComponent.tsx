@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from "react";
-import MedicationCellRenderer from "../renderer/MedicationCellRenderer";
+import MedicationCellRenderer from "../../renderer/MedicationCellRenderer";
 import { AgGridReact } from 'ag-grid-react';
-import IsPRNCellRenderer from "../renderer/IsPRNCellRenderer";
-import { IMedication } from "../interfaces/IMedication";
+import IsPRNCellRenderer from "../../renderer/IsPRNCellRenderer";
+import { IMedication } from "../../interfaces/IMedication";
 import { ColDef, GridReadyEvent, ValueGetterParams } from "ag-grid-community";
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
+import UpdateButtonCellRenderer from "../../renderer/UpdateButtonCellRenderer";
 
 const medicationValueGetter = (params: ValueGetterParams) => {
     let medication: IMedication = { 
@@ -47,8 +48,7 @@ const MedicationGridComponent = () => {
         {
             headerName: "Medication",
             valueGetter: medicationValueGetter,
-            cellRenderer: MedicationCellRenderer,
-            editable: true
+            cellRenderer: MedicationCellRenderer
         },
         {
             headerName: "Last Administered",
@@ -60,14 +60,16 @@ const MedicationGridComponent = () => {
         },
         {
             headerName: "Days",
-            field: "days",
-            editable: true
+            field: "days"
+        },
+        {
+            cellRenderer: UpdateButtonCellRenderer
         }
     ]);
 
     const onGridReady = (event: GridReadyEvent) => {
         fetch("/medications").then(
-            response => response.json()
+            async response => response.json()
         ).then(
             data => {
                 setRowData(data);
@@ -81,8 +83,11 @@ const MedicationGridComponent = () => {
       
     return (
         <div className="container" style={containerStyle}>
-            <h2 id="grid-header">Active Medication</h2>
-            <div className="ag-theme-alpine ag-odd-row" style={gridStyle}>
+            <div className="header">
+                <h2 id="grid-header">Active Medication</h2>
+                <input id="add-button" type="button" value="Add Medication"/>
+            </div>
+            <div className="ag-theme-alpine" style={gridStyle}>
                 <AgGridReact
                     rowData={rowData}
                     columnDefs={columnDefs}
