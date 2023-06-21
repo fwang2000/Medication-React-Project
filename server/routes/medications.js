@@ -15,10 +15,12 @@ const medicationRoutes = (app, fs) => {
 
         operations.readFile((data) => {
 
-            // create new row id or something
+            const medicationID = parseInt(data[Object.keys(data).length-1].index);
+            data[medicationID] = req.body;
+            data[medicationID]["index"] = medicationID + 1;
             
             operations.writeFile(JSON.stringify(data, null, 2), () => {
-                res.status(200).send('new medication added')
+                res.status(200).json({ message : `medication added` })
             }, dataPath)
         }, true, dataPath);
     });

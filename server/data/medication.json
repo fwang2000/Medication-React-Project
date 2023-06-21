@@ -3,8 +3,8 @@
     "index": "1",
     "name": "Azithromycin",
     "category": "OHC",
-    "lastadm": "2023-06-20T13:37",
-    "lastdose": "650 mG",
+    "lastadm": "Pending",
+    "lastdose": "",
     "route": "Intravenous",
     "frequency": "once a day",
     "dose": "650 milliGRAM(s)",
@@ -207,5 +207,18 @@
     "isprn": false,
     "issuspended": false,
     "summaryline": "\r\nGive 5 Unit(s) 06:00, IntraDermal, ONCE, Add Reason to Problem List., Review: 17-Jun-2023"
+  },
+  {
+    "name": "Doxycycline",
+    "category": "",
+    "lastadm": "Pending",
+    "lastdose": "",
+    "route": "Oral",
+    "frequency": "Every 2 days",
+    "dose": "",
+    "isprn": true,
+    "issuspended": true,
+    "summaryline": "N/A",
+    "index": 17
   }
 ]

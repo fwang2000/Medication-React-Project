@@ -2,27 +2,25 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function UpdateMedicationForm() {
+function AddMedicationForm() {
 
     let location = useLocation();
-
-    const pendingString = "Pending";
 
     const navigate = useNavigate();
 
     const [message, setMessage] = useState("");
     const [form, setForm] = useState({
-        name: location.state.rowData.name,
-        category: location.state.rowData.category,
-        pending: location.state.rowData.lastadm === pendingString,
-        lastadm: location.state.rowData.lastadm,
-        lastdose: location.state.rowData.lastdose,
-        route: location.state.rowData.route,
-        frequency: location.state.rowData.frequency,
-        dose: location.state.rowData.dose,
-        isprn: location.state.rowData.isprn,
-        issuspended: location.state.rowData.issuspended,
-        summaryline: location.state.rowData.summaryline
+        name: "",
+        category: "",
+        pending: false,
+        lastadm: "",
+        lastdose: "",
+        route: "",
+        frequency: "",
+        dose: "",
+        isprn: false,
+        issuspended: false,
+        summaryline: ""
     });
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -54,14 +52,13 @@ function UpdateMedicationForm() {
     const handleSubmit = (e: FormEvent) => {
 
         e.preventDefault();
-        fetch(`/medications/${location.state.rowData.index}`, {
-          method: "PUT",
+        fetch("/medications", {
+          method: "POST",
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            index: location.state.rowData.index,
             name: form.name,
             category: form.category,
-            lastadm: form.pending ? pendingString : form.lastadm,
+            lastadm: form.pending ? "Pending" : form.lastadm,
             lastdose: form.pending ? "" : form.lastdose,
             route: form.route,
             frequency: form.frequency,
@@ -72,6 +69,8 @@ function UpdateMedicationForm() {
           })
         }).then(async response => {
 
+            console.log("send request");
+            console.log(response);
           const resJson = await response.json();
 
           if (!response.ok) {
@@ -94,17 +93,17 @@ function UpdateMedicationForm() {
 
     const handleClick = () => {
 
-      navigate("../../medications/view");
+      navigate("../../medications");
     }
 
     return(
       <div>
         <form onSubmit={handleSubmit}>
           <label>
-            Medication Name: <input type="text" name="name" defaultValue={location.state.rowData.name} onChange={(e) => handleInputChange(e)} required/>
+            Medication Name: <input type="text" name="name" onChange={(e) => handleInputChange(e)} required/>
           </label>
           <label>
-            Category: <input type="text" name="category" defaultValue={location.state.rowData.category} onChange={(e) => handleInputChange(e)}/>
+            Category: <input type="text" name="category" onChange={(e) => handleInputChange(e)}/>
           </label>
           <label>
             Pending?
@@ -114,47 +113,47 @@ function UpdateMedicationForm() {
             <legend>Last Administered</legend>
             <label>
               Administered Date: 
-              <input type="datetime-local" name="lastadm" defaultValue={location.state.rowData.lastadm} onChange={(e) => handleInputChange(e)} required/>
+              <input type="datetime-local" name="lastadm" onChange={(e) => handleInputChange(e)} required/>
             </label>
             <label>Last Dosage
-              <input type="text" name="lastdose" defaultValue={location.state.rowData.lastdose} onChange={(e) => handleInputChange(e)} required/>
+              <input type="text" name="lastdose" onChange={(e) => handleInputChange(e)} required/>
             </label>
           </fieldset>
           <fieldset>
             <legend>Current Dosage</legend>
             <label>
               Route: 
-              <input type="text" name="route" defaultValue={location.state.rowData.route} onChange={(e) => handleInputChange(e)}/>
+              <input type="text" name="route" onChange={(e) => handleInputChange(e)}/>
             </label>
             <label>
               Frequency: 
-              <input type="text" name="frequency" defaultValue={location.state.rowData.frequency} onChange={(e) => handleInputChange(e)}/>
+              <input type="text" name="frequency" onChange={(e) => handleInputChange(e)}/>
             </label>
             <label>Dosage:
-              <input type="text" name="dosage" defaultValue={location.state.rowData.dose} onChange={(e) => handleInputChange(e)}/>
+              <input type="text" name="dosage" onChange={(e) => handleInputChange(e)}/>
             </label>
           </fieldset>
           <label>
             PRN?
-            <input type="checkbox" name="isprn" defaultChecked={location.state.rowData.isprn} onChange={(e) => handleInputChange(e)}/>
+            <input type="checkbox" name="isprn" defaultChecked={form.isprn} onChange={(e) => handleInputChange(e)}/>
           </label>
           <label>
             Suspended?
-            <input type="checkbox" name="issuspended" defaultChecked={location.state.rowData.issuspended} onChange={(e) => handleInputChange(e)}/>
+            <input type="checkbox" name="issuspended" defaultChecked={form.issuspended} onChange={(e) => handleInputChange(e)}/>
           </label>
           <br></br>
           <label>
             Summary
-            <textarea name="summaryline" rows={5} cols={60} defaultValue={location.state.rowData.summaryline} onChange={(e) => handleTextAreaChange(e)}/>
+            <textarea name="summaryline" rows={5} cols={60} onChange={(e) => handleTextAreaChange(e)}/>
           </label>
-          <input type="submit" value="Update Medication"/>
+          <input type="submit" value="Add Medication"/>
         </form>
         <div>
-          Update Status: { message }
+          Add Status: { message }
         </div>
         <input type="button" name="return" value="Return to Medications" onClick={handleClick}/>
       </div>
     )
 }
 
-export default UpdateMedicationForm;
+export default AddMedicationForm;

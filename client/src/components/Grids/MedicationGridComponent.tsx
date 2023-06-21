@@ -59,10 +59,6 @@ const MedicationGridComponent = () => {
             field: "lastdose"
         },
         {
-            headerName: "Days",
-            field: "days"
-        },
-        {
             cellRenderer: UpdateButtonCellRenderer
         }
     ]);
@@ -85,7 +81,6 @@ const MedicationGridComponent = () => {
         <div className="container" style={containerStyle}>
             <div className="header">
                 <h2 id="grid-header">Active Medication</h2>
-                <input id="add-button" type="button" value="Add Medication"/>
             </div>
             <div className="ag-theme-alpine" style={gridStyle}>
                 <AgGridReact

@@ -7,7 +7,7 @@ const readFile = (
     encoding = 'utf8'
 ) => {
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    fs.readFile(filePath, encoding, (err, data) => {
         
         if (err) {
             throw err;
