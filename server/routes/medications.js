@@ -17,7 +17,7 @@ const medicationRoutes = (app, fs) => {
 
             const medicationID = parseInt(data[Object.keys(data).length-1].index);
             data[medicationID] = req.body;
-            data[medicationID]["index"] = medicationID + 1;
+            data[medicationID]["index"] = (medicationID + 1).toString();
             
             operations.writeFile(JSON.stringify(data, null, 2), () => {
                 res.status(200).json({ message : `medication added` })
@@ -25,11 +25,11 @@ const medicationRoutes = (app, fs) => {
         }, true, dataPath);
     });
 
-    app.put('/medications/:id', (req, res) => {
+    app.put('/medications/:index', (req, res) => {
 
         operations.readFile((data) => {
 
-            const medicationID = req.params['id'] - 1;
+            const medicationID = req.params['index'] - 1;
             data[medicationID] = req.body;
 
             operations.writeFile(JSON.stringify(data, null, 2), () => {
@@ -38,15 +38,24 @@ const medicationRoutes = (app, fs) => {
         }, true, dataPath);
     });
 
-    app.delete('/medications/:id', (req, res) => {
+    app.delete('/medications/:index', (req, res) => {
 
         operations.readFile((data) => {
 
-            const medicationId = req.params['index'];
-            delete data[medicationId];
+            const medicationId = parseInt(req.params['index']) - 1;
+
+            for (let i = medicationId; i< Object.keys(data).length; i++) {
+                let index = parseInt(data[i]['index']);
+                data[i]['index'] = (index - 1).toString();
+            }
+
+            data.splice(medicationId, 1);
 
             operations.writeFile(JSON.stringify(data, null, 2), () => {
-                res.status(200).send(`medication id ${medicationID} deleted`);
+                res.status(200).json(
+                    {
+                        message : `medication id ${medicationId} deleted`
+                    });
             }, dataPath);
         }, true, dataPath);
     });

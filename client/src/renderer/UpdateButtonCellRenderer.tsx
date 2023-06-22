@@ -13,7 +13,7 @@ const UpdateButtonCellRenderer = (props: ICellRendererParams) => {
         <input 
             type="button" 
             onClick={clickHandler}
-            value="Update Row Data"
+            value="Update Medication Data"
         >
         </input>
     );

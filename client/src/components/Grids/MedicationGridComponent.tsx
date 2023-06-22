@@ -8,6 +8,7 @@ import { ColDef, GridReadyEvent, ValueGetterParams } from "ag-grid-community";
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import UpdateButtonCellRenderer from "../../renderer/UpdateButtonCellRenderer";
+import DeleteButtonCellRenderer from "../../renderer/DeleteButtonCellRenderer";
 
 const medicationValueGetter = (params: ValueGetterParams) => {
     let medication: IMedication = { 
@@ -60,6 +61,9 @@ const MedicationGridComponent = () => {
         },
         {
             cellRenderer: UpdateButtonCellRenderer
+        },
+        {
+            cellRenderer: DeleteButtonCellRenderer
         }
     ]);
 
