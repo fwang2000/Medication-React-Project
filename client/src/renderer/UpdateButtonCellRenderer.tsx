@@ -6,7 +6,7 @@ const UpdateButtonCellRenderer = (props: ICellRendererParams) => {
     const navigate = useNavigate();
 
     const clickHandler = () => {
-        navigate('../medications/update/' + props.node.data.index, { state: { rowData: props.node.data } });
+        navigate('/medications/update/' + props.node.data.index, { state: { rowData: props.node.data } });
     }
 
     return (

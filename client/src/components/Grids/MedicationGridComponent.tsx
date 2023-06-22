@@ -9,6 +9,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import UpdateButtonCellRenderer from "../../renderer/UpdateButtonCellRenderer";
 import DeleteButtonCellRenderer from "../../renderer/DeleteButtonCellRenderer";
+import { useNavigate } from "react-router-dom";
 
 const medicationValueGetter = (params: ValueGetterParams) => {
     let medication: IMedication = { 
@@ -22,6 +23,7 @@ const medicationValueGetter = (params: ValueGetterParams) => {
 
 const MedicationGridComponent = () => {
 
+    const navigate = useNavigate();
     const [rowData, setRowData] = useState([{}]);
     const containerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
     const gridStyle = useMemo(() => ({ height: '95%', width: '100%' }), []);
@@ -67,6 +69,10 @@ const MedicationGridComponent = () => {
         }
     ]);
 
+    const handleBackClick = () => {
+        navigate("/medications");
+    }
+
     const onGridReady = (event: GridReadyEvent) => {
         fetch("/medications").then(
             async response => response.json()
@@ -85,6 +91,7 @@ const MedicationGridComponent = () => {
         <div className="container" style={containerStyle}>
             <div className="header">
                 <h2 id="grid-header">Active Medication</h2>
+                <input type="button" value="Back" onClick={handleBackClick}/>
             </div>
             <div className="ag-theme-alpine" style={gridStyle}>
                 <AgGridReact

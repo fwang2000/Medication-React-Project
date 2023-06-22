@@ -14,10 +14,15 @@ function MedicationLandingComponent() {
         navigate("./view");
     }
 
+    const handleBackClick = () => {
+        navigate("/dashboard");
+    }
+
     return(
         <div>
             <input type="button" value="Add Medication" onClick={handleAddClick}/>
             <input type="button" value="View" onClick={handleViewClick}/>
+            <input type="button" value="Back" onClick={handleBackClick}/>
         </div>
     )
 }
