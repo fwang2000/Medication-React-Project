@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
-function MedicationLandingComponent() {
-
+function DripOrderLandingComponent() {
+    
     const navigate = useNavigate();
 
     const handleAddClick = () => {
@@ -20,11 +20,11 @@ function MedicationLandingComponent() {
 
     return(
         <div>
-            <input type="button" value="Add Medication" onClick={handleAddClick}/>
+            <input type="button" value="Add Drip Order" onClick={handleAddClick}/>
             <input type="button" value="View" onClick={handleViewClick}/>
             <input type="button" value="Back" onClick={handleBackClick}/>
         </div>
-    )
+    );
 }
 
-export default MedicationLandingComponent;
+export default DripOrderLandingComponent;

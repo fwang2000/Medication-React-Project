@@ -22,7 +22,7 @@ html, body, #root, .App, .container {
   display: block;
 }
 
-#grid-header {
+#medication-grid-header, #drip-grid-header {
   color: #e69b88;
   font-size: 5vh;
   font-family: Helvetica, sans-serif;
@@ -33,7 +33,4 @@ html, body, #root, .App, .container {
 .ag-theme-alpine {
   height: 95%;
   width: 100%;
-  color: #e69b88;
-  --ag-odd-row-background-color: blue;
-  --ag-odd-row-foreground-color: pink;
 }

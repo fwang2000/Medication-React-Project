@@ -6,12 +6,18 @@ function Dashboard() {
 
     const handleMedicationClick = () => {
 
-        navigate("./medications");
+        navigate("/medications");
+    }
+
+    const handleDOClick = () => {
+
+        navigate("/drip-orders");
     }
 
     return(
         <div>
             <input type="button" value="Medication" onClick={handleMedicationClick}/>
+            <input type="button" value="Drip Orders" onClick={handleDOClick}/>
         </div>
     )
 }

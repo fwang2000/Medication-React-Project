@@ -1,14 +1,14 @@
-import React, { useMemo, useState } from "react";
-import MedicationCellRenderer from "../../renderer/MedicationCellRenderer";
+import { useMemo, useState } from "react";
+import MedicationCellRenderer from "../../renderer/medication/MedicationCellRenderer";
 import { AgGridReact } from 'ag-grid-react';
-import IsPRNCellRenderer from "../../renderer/IsPRNCellRenderer";
+import IsPRNCellRenderer from "../../renderer/medication/IsPRNCellRenderer";
 import { IMedication } from "../../interfaces/IMedication";
-import { ColDef, GridReadyEvent, ValueGetterParams } from "ag-grid-community";
+import { ColDef, GridReadyEvent, ICellRendererParams, ValueGetterParams } from "ag-grid-community";
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import UpdateButtonCellRenderer from "../../renderer/UpdateButtonCellRenderer";
-import DeleteButtonCellRenderer from "../../renderer/DeleteButtonCellRenderer";
+import UpdateButtonCellRenderer from "../../renderer/medication/UpdateButtonCellRenderer";
+import DeleteButtonCellRenderer from "../../renderer/medication/DeleteButtonCellRenderer";
 import { useNavigate } from "react-router-dom";
 
 const medicationValueGetter = (params: ValueGetterParams) => {
@@ -19,6 +19,20 @@ const medicationValueGetter = (params: ValueGetterParams) => {
     }
 
     return medication;
+}
+
+const LastADMRenderer = (params: ICellRendererParams) => {
+
+    let admString = params.value;
+
+    if (admString === "Pending") {
+
+        return admString;
+
+    } else {
+
+        return //(new Date(admString)).toDateString();
+    }
 }
 
 const MedicationGridComponent = () => {
@@ -55,7 +69,8 @@ const MedicationGridComponent = () => {
         },
         {
             headerName: "Last Administered",
-            field: "lastadm"
+            field: "lastadm",
+            cellRenderer: LastADMRenderer
         },
         {
             headerName: "Last Dose",
@@ -90,7 +105,7 @@ const MedicationGridComponent = () => {
     return (
         <div className="container" style={containerStyle}>
             <div className="header">
-                <h2 id="grid-header">Active Medication</h2>
+                <h2 id="medication-grid-header">Active Medication</h2>
                 <input type="button" value="Back" onClick={handleBackClick}/>
             </div>
             <div className="ag-theme-alpine" style={gridStyle}>
