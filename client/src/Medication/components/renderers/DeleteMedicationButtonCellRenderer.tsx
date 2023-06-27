@@ -1,7 +1,7 @@
 import { ICellRendererParams } from 'ag-grid-community';
 import { MouseEvent } from 'react';
 
-const DeleteButtonCellRenderer = (props: ICellRendererParams) => {
+const DeleteMedicationButtonCellRenderer = (props: ICellRendererParams) => {
 
     const clickHandler = (e: MouseEvent<HTMLInputElement>) => {
 
@@ -39,4 +39,4 @@ const DeleteButtonCellRenderer = (props: ICellRendererParams) => {
     );
 };
 
-export default DeleteButtonCellRenderer;
+export default DeleteMedicationButtonCellRenderer;

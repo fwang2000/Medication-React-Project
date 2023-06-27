@@ -1,14 +1,14 @@
 import { useMemo, useState } from "react";
-import MedicationCellRenderer from "../../renderer/medication/MedicationCellRenderer";
+import MedicationCellRenderer from "./renderers/MedicationCellRenderer";
 import { AgGridReact } from 'ag-grid-react';
-import IsPRNCellRenderer from "../../renderer/medication/IsPRNCellRenderer";
-import { IMedication } from "../../interfaces/IMedication";
+import IsPRNCellRenderer from "./renderers/IsPRNCellRenderer";
+import { IMedication } from "../interfaces/IMedication";
 import { ColDef, GridReadyEvent, ICellRendererParams, ValueGetterParams } from "ag-grid-community";
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import UpdateButtonCellRenderer from "../../renderer/medication/UpdateButtonCellRenderer";
-import DeleteButtonCellRenderer from "../../renderer/medication/DeleteButtonCellRenderer";
+import UpdateMedicationButtonCellRenderer from "./renderers/UpdateMedicationButtonCellRenderer";
+import DeleteMedicationButtonCellRenderer from "./renderers/DeleteMedicationButtonCellRenderer";
 import { useNavigate } from "react-router-dom";
 
 const medicationValueGetter = (params: ValueGetterParams) => {
@@ -31,7 +31,7 @@ const LastADMRenderer = (params: ICellRendererParams) => {
 
     } else {
 
-        return //(new Date(admString)).toDateString();
+        return (new Date(admString)).toDateString();
     }
 }
 
@@ -77,10 +77,10 @@ const MedicationGridComponent = () => {
             field: "lastdose"
         },
         {
-            cellRenderer: UpdateButtonCellRenderer
+            cellRenderer: UpdateMedicationButtonCellRenderer
         },
         {
-            cellRenderer: DeleteButtonCellRenderer
+            cellRenderer: DeleteMedicationButtonCellRenderer
         }
     ]);
 

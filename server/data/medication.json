@@ -146,7 +146,7 @@
     "category": "",
     "name": "Sodium Chloride 0.9% Infusion",
     "days": 20,
-    "lastadm": "25-May-2023 10:12",
+    "lastadm": "25-May-2023T10:12:00",
     "lastdose": "100 mL/hr",
     "route": "IntraVenous Bolus",
     "frequency": "<Continuous>",

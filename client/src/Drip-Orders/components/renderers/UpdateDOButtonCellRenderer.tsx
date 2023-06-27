@@ -1,22 +1,22 @@
 import { ICellRendererParams } from 'ag-grid-community';
 import { useNavigate } from 'react-router-dom';
 
-const UpdateButtonCellRenderer = (props: ICellRendererParams) => {
+const UpdateDOButtonCellRenderer = (props: ICellRendererParams) => {
 
     const navigate = useNavigate();
 
     const clickHandler = () => {
-        navigate('/medications/update/' + props.node.data.index, { state: { rowData: props.node.data } });
+        navigate('/drip-orders/update/' + props.node.data.parameterguid, { state: { rowData: props.node.data } });
     }
 
     return (
         <input 
             type="button" 
             onClick={clickHandler}
-            value="Update Medication Data"
+            value="Update Drip Order Data"
         >
         </input>
     );
 };
 
-export default UpdateButtonCellRenderer;
+export default UpdateDOButtonCellRenderer;

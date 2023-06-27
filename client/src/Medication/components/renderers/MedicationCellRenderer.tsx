@@ -1,5 +1,5 @@
-import { ICellRenderer, ICellRendererParams } from 'ag-grid-community';
-import React, {Component} from 'react';
+import { ICellRendererParams } from 'ag-grid-community';
+import {Component} from 'react';
 import { IMedication } from '../../interfaces/IMedication';
 
 export default class MedicationCellRenderer extends Component<{}, { cellValue:IMedication }> {

@@ -1,7 +1,14 @@
-import { ColDef, GridReadyEvent } from "ag-grid-community";
+import { ColDef, GridReadyEvent, ICellRendererParams } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import DeleteDOButtonCellRenderer from "./renderers/DeleteDOButtonCellRenderer";
+import UpdateDOButtonCellRenderer from "./renderers/UpdateDOButtonCellRenderer";
+
+const dateCellRenderer = (params: ICellRendererParams) => {
+
+    return (new Date(params.value)).toDateString();
+}
 
 function DripOrderGridComponent() {
     
@@ -32,17 +39,8 @@ function DripOrderGridComponent() {
                     if (dateAsString == null) {
                         return 0;
                     }
-   
-                    // In the example application, dates are stored as dd/mm/yyyy
-                    // We create a Date object for comparison against the filter date
-                    const dateParts = (dateAsString).substring(0,11).split('-');
-                    const year = Number(dateParts[2]);
-                    const month = Number(new Date(Date.parse(dateParts[1] +" 1, 2000")).getMonth()+1) - 1;
-                    const day = Number(dateParts[0]);
-                    const cellDate = new Date(year, month, day);
-                    console.log(year, month, day);
-                    console.log(filterLocalDateAtMidnight);
-                    console.log(cellDate);
+                    
+                    const cellDate = new Date(dateAsString);
    
                     // Now that both parameters are Date objects, we can compare
                     if (cellDate < filterLocalDateAtMidnight) {
@@ -55,7 +53,8 @@ function DripOrderGridComponent() {
                 inRangeInclusive: true,
                 inRangeFloatingFilterDateFormat: 'Do MMM YYYY',
                 filterOptions: ['inRange']
-            }
+            },
+            cellRenderer: dateCellRenderer
         },
         {
             headerName: "Infusion",
@@ -68,11 +67,17 @@ function DripOrderGridComponent() {
         {
             headerName: "UOM",
             field: "dripuom"
+        },
+        {
+            cellRenderer: UpdateDOButtonCellRenderer
+        },
+        {
+            cellRenderer: DeleteDOButtonCellRenderer
         }
     ]);
 
     const onGridReady = (event: GridReadyEvent) => {
-        fetch("/drip").then(
+        fetch("/drip-orders").then(
             async response => response.json()
         ).then(
             data => {

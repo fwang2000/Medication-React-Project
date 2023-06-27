@@ -69,8 +69,6 @@ function AddMedicationForm() {
           })
         }).then(async response => {
 
-            console.log("send request");
-            console.log(response);
           const resJson = await response.json();
 
           if (!response.ok) {
