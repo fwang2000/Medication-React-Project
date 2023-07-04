@@ -47,26 +47,27 @@ exports.login = async (req, res) => {
 
             if (!match) {
 
-                res.status(401).json({ 
+                return res.status(401).json({ 
                     accessToken: null,
                     error: "Login Failed: Wrong Username/Password Combination" 
                 });
 
-            }
-        });
+            } else {
 
-        const token = jwt.sign({ name: user.username},
-            authConfig.secret,
-            {
-                algorithm: 'HS256',
-                allowInsecureKeySizes: true,
-                expiresIn: 86400
+                const token = jwt.sign({ name: user.username },
+                    authConfig.secret,
+                    {
+                        algorithm: 'HS256',
+                        allowInsecureKeySizes: true,
+                        expiresIn: 86400
+                    }
+                );
+        
+                return res.status(200).json({
+                    username: user.username,
+                    accessToken: token
+                });
             }
-        );
-
-        res.status(200).json({
-            username: user.username,
-            accessToken: token
         });
         
     }, true, dataPath);

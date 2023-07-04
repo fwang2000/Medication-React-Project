@@ -2,7 +2,7 @@ const operations = require("../controllers/helpers/operations");
 const authConfig = require("../config/authConfig");
 const dataPath = authConfig.dataPath;
 
-checkDuplicateUsername = (req, res) => {
+checkDuplicateUsername = (req, res, next) => {
 
     operations.readFile((data) => {
 
@@ -22,6 +22,8 @@ checkDuplicateUsername = (req, res) => {
         }
         
     }, true, dataPath);
+
+    next();
 }
 
 module.exports = checkDuplicateUsername;

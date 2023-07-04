@@ -21,13 +21,5 @@
     "dripname": "Epinephrine Drip  Sodium Chloride 0.9% Epinephrine  (2 mL/hr ) + (Sodium Chloride 0.9% 50.00000ml Epinephrine)",
     "dripvalue": "15.00",
     "dripuom": "mL/hr"
-  },
-  {
-    "ChartflowsheetGUID": 28,
-    "dripname": "drip Order Test",
-    "intakedt": "2023-05-31T16:26",
-    "dripvalue": "1009",
-    "dripuom": "mL/hr",
-    "parameterguid": 9721
   }
 ]
