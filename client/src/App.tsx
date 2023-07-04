@@ -11,13 +11,15 @@ import DripOrderLandingComponent from './Drip-Orders/components/DripOrderLanding
 import DripOrderGridComponent from './Drip-Orders/components/DripOrderGridComponent';
 import UpdateDOForm from './Drip-Orders/components/forms/UpdateDOForm';
 import AddDOForm from './Drip-Orders/components/forms/AddDOForm';
+import Login from './Authentication/Login';
 
 function App() {
 
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={<Dashboard/>}></Route>
+        <Route path='/' element={<Login/>}></Route>
+        <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/medications' element={<MedicationLandingComponent/>}></Route>
         <Route path='/medications/add' element={<AddMedicationForm/>}></Route>
         <Route path='/medications/view' element={<MedicationGridComponent/>}></Route>

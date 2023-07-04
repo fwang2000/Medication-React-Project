@@ -1,15 +1,17 @@
 const dripRoutes = require('./drips');
 const medicationRoutes = require('./medications');
+const authRoutes = require('./auth');
 
-const appRouter = (app, fs) => {
+const appRouter = (app) => {
 
     app.get('/', (req, res) => {
 
         res.send('Welcome to the Dev Server');
     });
 
-    medicationRoutes(app, fs);
-    dripRoutes(app, fs);
+    medicationRoutes(app);
+    dripRoutes(app);
+    authRoutes(app);
 };
 
 module.exports = appRouter;

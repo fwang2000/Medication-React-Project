@@ -15,7 +15,7 @@ function MedicationLandingComponent() {
     }
 
     const handleBackClick = () => {
-        navigate("/");
+        navigate("/dashboard");
     }
 
     return(

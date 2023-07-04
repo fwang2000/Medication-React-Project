@@ -1,64 +1,14 @@
-const operations = require('./operations');
+const medicationController = require('../controllers/medicationController');
 
-const medicationRoutes = (app, fs) => {
+const medicationRoutes = (app) => {
 
-    const dataPath = './data/medication.json';
+    app.get('/medications', medicationController.getMedication);
 
-    app.get('/medications', (req, res) => {
+    app.post('/medications', verifyToken, medicationController.addMedication);
 
-        operations.readFile((data) => {
-            res.send(data)
-        }, true, dataPath);
-    });
+    app.put('/medications/:index', verifyToken, medicationController.updateMedication);
 
-    app.post('/medications', (req, res) => {
-
-        operations.readFile((data) => {
-
-            const medicationID = parseInt(data[Object.keys(data).length-1].index);
-            data[medicationID] = req.body;
-            data[medicationID]["index"] = (medicationID + 1).toString();
-            
-            operations.writeFile(JSON.stringify(data, null, 2), () => {
-                res.status(200).json({ message : `medication added` })
-            }, dataPath)
-        }, true, dataPath);
-    });
-
-    app.put('/medications/:index', (req, res) => {
-
-        operations.readFile((data) => {
-
-            const medicationID = req.params['index'] - 1;
-            data[medicationID] = req.body;
-
-            operations.writeFile(JSON.stringify(data, null, 2), () => {
-                res.status(200).json({ message : `medication id ${medicationID} updated` });
-            }, dataPath);
-        }, true, dataPath);
-    });
-
-    app.delete('/medications/:index', (req, res) => {
-
-        operations.readFile((data) => {
-
-            const medicationId = parseInt(req.params['index']) - 1;
-
-            for (let i = medicationId; i< Object.keys(data).length; i++) {
-                let index = parseInt(data[i]['index']);
-                data[i]['index'] = (index - 1).toString();
-            }
-
-            data.splice(medicationId, 1);
-
-            operations.writeFile(JSON.stringify(data, null, 2), () => {
-                res.status(200).json(
-                    {
-                        message : `medication id ${medicationId} deleted`
-                    });
-            }, dataPath);
-        }, true, dataPath);
-    });
+    app.delete('/medications/:index', verifyToken, );
 };
 
 module.exports = medicationRoutes;

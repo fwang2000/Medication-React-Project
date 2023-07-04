@@ -1,5 +1,5 @@
 import { Column, ICellRendererParams, IRowNode } from 'ag-grid-community';
-import React, {Component} from 'react';
+import {Component} from 'react';
 
 interface StateProps {
     cellValue: boolean,

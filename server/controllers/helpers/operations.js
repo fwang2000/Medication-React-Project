@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const readFile = (
+exports.readFile = (
     callback,
     returnJson = false,
     filePath,
@@ -17,7 +17,7 @@ const readFile = (
     });
 }
 
-const writeFile = (
+exports.writeFile = (
     fileData,
     callback,
     filePath,
@@ -31,6 +31,3 @@ const writeFile = (
         callback();
     })
 }
-
-exports.readFile = readFile;
-exports.writeFile = writeFile;

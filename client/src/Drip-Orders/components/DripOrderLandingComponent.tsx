@@ -15,7 +15,7 @@ function DripOrderLandingComponent() {
     }
 
     const handleBackClick = () => {
-        navigate("/");
+        navigate("/dashboard");
     }
 
     return(
