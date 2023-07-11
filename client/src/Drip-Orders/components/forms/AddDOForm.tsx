@@ -62,7 +62,7 @@ function AddDOForm() {
 
           console.log("There was an error: " + error);
           setMessage("there was an error");
-        })
+        });
     }
 
     const handleClick = () => {

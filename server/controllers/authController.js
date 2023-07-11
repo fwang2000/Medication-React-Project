@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
         
         if (typeof user === 'undefined') {
 
-            res.status(404).json({ error: "Login Failed: User Doesn't Exist" });
+            return res.status(404).json({ message: "Login Failed: User Doesn't Exist" });
         } 
 
         bcrypt.compare(password, user["password"]).then((match) => {
@@ -49,7 +49,7 @@ exports.login = async (req, res) => {
 
                 return res.status(401).json({ 
                     accessToken: null,
-                    error: "Login Failed: Wrong Username/Password Combination" 
+                    message: "Login Failed: Wrong Username/Password Combination" 
                 });
 
             } else {

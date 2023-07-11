@@ -1,4 +1,6 @@
 const operations = require("./helpers/operations");
+const medicationConfig = require("../config/medicationConfig")
+const dataPath = medicationConfig.dataPath;
 
 exports.getMedication = (req, res) => {
 

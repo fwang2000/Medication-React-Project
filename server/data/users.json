@@ -6,5 +6,13 @@
   {
     "username": "username",
     "password": "$2b$10$INHqrDwn0OH9j4HS13hxeukYY6Pn2LBM5WhcvswafFE31wPy6MJle"
+  },
+  {
+    "username": "new_user",
+    "password": "$2b$10$llOry96f2GGmrTL0/F/4Z.ZbhKhNdeSgG6gdMo0eiW2FVJS5WbMWi"
+  },
+  {
+    "username": "new_user",
+    "password": "$2b$10$eZJlNuAEpvZyGdDmCMAIzuzUgzKJSN0vnaTWcS.ij0bGuZuRRcUuq"
   }
 ]
