@@ -13,13 +13,14 @@ import UpdateDOForm from './Drip-Orders/components/forms/UpdateDOForm';
 import AddDOForm from './Drip-Orders/components/forms/AddDOForm';
 import LoginComponent from './Authentication/components/LoginComponent';
 import RegistrationComponent from './Authentication/components/RegistrationComponent';
+import Home from './Authentication/components/Home';
 
 function App() {
 
   return (
     <div className="App">
       <Routes>
-        <Route path='/'></Route>
+        <Route path='/' element={<Home/>}></Route>
         <Route path='/login' element={<LoginComponent/>}></Route>
         <Route path='/register' element={<RegistrationComponent/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
