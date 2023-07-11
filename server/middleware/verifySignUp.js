@@ -14,11 +14,9 @@ checkDuplicateUsername = (req, res, next) => {
 
         if (typeof user !== "undefined") {
 
-            res.status(400).json({
+            return res.status(400).json({
                 message: "Username is already taken!"
             });
-
-            return;
         }
         
     }, true, dataPath);

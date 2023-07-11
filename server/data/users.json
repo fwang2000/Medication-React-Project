@@ -14,5 +14,25 @@
   {
     "username": "new_user",
     "password": "$2b$10$eZJlNuAEpvZyGdDmCMAIzuzUgzKJSN0vnaTWcS.ij0bGuZuRRcUuq"
+  },
+  {
+    "username": "randomuser",
+    "password": "$2b$10$PasSRi/945M8HsAt9VHR9eTIvTJiQtiz3KCEVp6C6/Ja0zEJZb.BG"
+  },
+  {
+    "username": "randomuser",
+    "password": "$2b$10$p2d7JpqEIH1pod2fiBkyjeTrN.1RZ/yxVb.vF1b1GIYoyzuoVf3oa"
+  },
+  {
+    "username": "randomuser",
+    "password": "$2b$10$/VY5ao/Wy.7Xw9OJb6nI1uBPPJ9uU2z4ai60YtdBcYC5A.T8NpCOu"
+  },
+  {
+    "username": "randomuser",
+    "password": "$2b$10$0deMBULcBhvj0flFcxM2hOXIVmGRM0M6k9ATdT85clk3p44URoXo6"
+  },
+  {
+    "username": "randomuser",
+    "password": "$2b$10$OJDCrdhZwHWn3NlvltTmDuIhCNNCmizjs87RMfikINqmhPDNo4bdC"
   }
 ]

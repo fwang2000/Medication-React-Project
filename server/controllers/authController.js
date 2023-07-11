@@ -19,7 +19,7 @@ exports.register = (req, res) => {
             data.push(registration);
             
             operations.writeFile(JSON.stringify(data, null, 2), () => {
-                res.status(200).json({ message : `user ${username} added` });
+                return res.status(200).json({ message : `user ${username} added` });
             }, dataPath)
 
         });
