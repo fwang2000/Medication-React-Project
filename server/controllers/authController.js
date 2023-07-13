@@ -59,7 +59,7 @@ exports.login = async (req, res) => {
                     {
                         algorithm: 'HS256',
                         allowInsecureKeySizes: true,
-                        expiresIn: 86400
+                        expiresIn: 1000
                     }
                 );
         

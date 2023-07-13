@@ -15,7 +15,7 @@ class AuthService {
 
           if (resJson.accessToken) {
             
-                localStorage.setItem("user", resJson);
+                localStorage.setItem("user", JSON.stringify(resJson));
 
           } else {
 

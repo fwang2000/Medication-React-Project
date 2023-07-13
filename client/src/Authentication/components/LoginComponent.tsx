@@ -30,8 +30,6 @@ function LoginComponent() {
         setMessage("Login Status:");
         setLoading(true);
 
-        console.log(username, password);
-
         authService.login(username, password).then(
             () => {
                 navigate("/dashboard");
