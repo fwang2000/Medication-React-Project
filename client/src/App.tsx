@@ -1,5 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import MedicationGridComponent from './Medication/components/MedicationGridComponent';
@@ -14,25 +15,57 @@ import AddDOForm from './Drip-Orders/components/forms/AddDOForm';
 import LoginComponent from './Authentication/components/LoginComponent';
 import RegistrationComponent from './Authentication/components/RegistrationComponent';
 import Home from './Authentication/components/Home';
+import IUser from './types/IUser';
+import AuthService from './Authentication/services/AuthService';
+import EventBus from './common/EventBus';
+import AuthVerify from './common/AuthVerify';
 
 function App() {
 
+  const [currentUser, setCurrentUser] = useState<IUser | undefined>(undefined);
+
+  useEffect(() => {
+
+      const user = AuthService.getCurrentUser();
+
+      if (user) {
+
+        setCurrentUser(user);
+      }
+
+      EventBus.on("logout", logOut);
+
+      return () => {
+        EventBus.remove("logout", logOut);
+      }
+  }, []);
+
+  const logOut = () => {
+
+    AuthService.logout();
+    setCurrentUser(undefined);
+  }
+
   return (
     <div className="App">
-      <Routes>
-        <Route path='/' element={<Home/>}></Route>
-        <Route path='/login' element={<LoginComponent/>}></Route>
-        <Route path='/register' element={<RegistrationComponent/>}></Route>
-        <Route path='/dashboard' element={<Dashboard/>}></Route>
-        <Route path='/medications' element={<MedicationLandingComponent/>}></Route>
-        <Route path='/medications/add' element={<AddMedicationForm/>}></Route>
-        <Route path='/medications/view' element={<MedicationGridComponent/>}></Route>
-        <Route path='/medications/update/:index' element={<UpdateMedicationForm/>}></Route>
-        <Route path='/drip-orders' element={<DripOrderLandingComponent/>}></Route>
-        <Route path='/drip-orders/add' element={<AddDOForm/>}></Route>
-        <Route path='/drip-orders/view' element={<DripOrderGridComponent/>}></Route>
-        <Route path='/drip-orders/update/:index' element={<UpdateDOForm/>}></Route>
-      </Routes>
+      <div className='route-container'>
+        <Routes>
+          <Route path='/' element={<Home/>}></Route>
+          <Route path='/login' element={<LoginComponent/>}></Route>
+          <Route path='/register' element={<RegistrationComponent/>}></Route>
+          <Route path='/dashboard' element={<Dashboard/>}></Route>
+          <Route path='/medications' element={<MedicationLandingComponent/>}></Route>
+          <Route path='/medications/add' element={<AddMedicationForm/>}></Route>
+          <Route path='/medications/view' element={<MedicationGridComponent/>}></Route>
+          <Route path='/medications/update/:index' element={<UpdateMedicationForm/>}></Route>
+          <Route path='/drip-orders' element={<DripOrderLandingComponent/>}></Route>
+          <Route path='/drip-orders/add' element={<AddDOForm/>}></Route>
+          <Route path='/drip-orders/view' element={<DripOrderGridComponent/>}></Route>
+          <Route path='/drip-orders/update/:index' element={<UpdateDOForm/>}></Route>
+        </Routes>
+      </div>
+      
+      <AuthVerify logOut={logOut}/>
     </div>
   );
 }

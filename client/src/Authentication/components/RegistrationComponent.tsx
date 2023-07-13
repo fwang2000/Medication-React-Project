@@ -1,7 +1,7 @@
 import React, { useState, useRef, FormEvent, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import authService from "../services/authService";
+import authService from "../services/AuthService";
 
 function RegistrationComponent() {
 
