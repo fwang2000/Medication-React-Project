@@ -14,10 +14,16 @@ function Dashboard() {
         navigate("/drip-orders");
     }
 
+    const handleHomeClick = () => {
+
+        navigate("/");
+    }
+
     return(
         <div>
             <input type="button" value="Medication" onClick={handleMedicationClick}/>
             <input type="button" value="Drip Orders" onClick={handleDOClick}/>
+            <input type="button" value="Home" onClick={handleHomeClick}/>
         </div>
     )
 }

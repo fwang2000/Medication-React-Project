@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import 'ag-grid-community/styles/ag-grid.css';
@@ -22,16 +22,9 @@ import AuthVerify from './common/AuthVerify';
 
 function App() {
 
-  const [currentUser, setCurrentUser] = useState<IUser | undefined>(undefined);
+  const navigate = useNavigate();
 
   useEffect(() => {
-
-      const user = AuthService.getCurrentUser();
-
-      if (user) {
-
-        setCurrentUser(user);
-      }
 
       EventBus.on("logout", logOut);
 
@@ -43,14 +36,15 @@ function App() {
   const logOut = () => {
 
     AuthService.logout();
-    setCurrentUser(undefined);
+    navigate("/");
   }
 
   return (
     <div className="App">
+
       <div className='route-container'>
         <Routes>
-          <Route path='/' element={<Home/>}></Route>
+          <Route path='/' element={<Home logOut={logOut}/>}></Route>
           <Route path='/login' element={<LoginComponent/>}></Route>
           <Route path='/register' element={<RegistrationComponent/>}></Route>
           <Route path='/dashboard' element={<Dashboard/>}></Route>

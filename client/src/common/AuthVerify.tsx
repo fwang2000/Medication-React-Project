@@ -22,12 +22,11 @@ const AuthVerify = (props: any) => {
         const user = JSON.parse(userString);
     
         if (user) {
-            
+
           const decodedJwt = parseJwt(user.accessToken);
     
           if (decodedJwt.exp * 1000 < Date.now()) {
-
-            console.log("logout");
+            
             props.logOut();
           }
         }

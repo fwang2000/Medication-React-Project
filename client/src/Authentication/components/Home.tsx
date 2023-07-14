@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
-function Home() {
+function Home(props: any) {
+
+    const currentUser = localStorage.getItem("user");
 
     const navigate = useNavigate();
 
@@ -9,16 +11,28 @@ function Home() {
         navigate("/login");
     }
 
+    const handleLogoutClick = () => {
+
+        props.logOut();
+    }
+
     const handleRegisterClick = () => {
 
         navigate("/register");
     }
 
-
     return (
         <div>
-            <input type="button" value="Login" onClick={handleLoginClick}/>
-            <input type="button" value="Register" onClick={handleRegisterClick}/>
+            { currentUser ? (
+                <div>
+                    <input type="button" value="Logout" onClick={handleLogoutClick}/>
+                </div>
+            ) : (
+                <div>
+                    <input type="button" value="Login" onClick={handleLoginClick}/>
+                    <input type="button" value="Register" onClick={handleRegisterClick}/>
+                </div>
+            ) }
         </div>
     )
 }
